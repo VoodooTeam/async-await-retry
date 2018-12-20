@@ -2,13 +2,31 @@
   "name": "async-await-retry",
   "version": "1.0.0",
   "description": "Simple module to retry a function with async/await syntax !",
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "keywords": [
+    "retry",
+    "backoff",
+    "repeat",
+    "replay",
+    "async",
+    "await",
+    "promises",
+    "retries"
+  ],
+  "homepage": "https://github.com/VoodooTeam/async-await-retry",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
     "lint": "./node_modules/.bin/eslint -c ./.eslintrc ./",
     "all": "npm run lint && npm run test"
   },
-  "author": "Vincent Vallet",
+  "author": {
+    "name": "Vincent Vallet",
+    "email": "wallet77@gmail.com",
+    "url": "https://github.com/wallet77"
+  },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
