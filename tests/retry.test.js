@@ -13,7 +13,7 @@ describe('retry', () => {
         try {
             await retry(mock);
             throw new Error('This test should have thrown an error !!!!');
-        } catch(e) {
+        } catch (e) {
             expect(mock).toHaveBeenCalled();
             expect(mock.mock.calls.length).toBe(3);
             expect(e.message).toEqual('WTF');
@@ -27,7 +27,7 @@ describe('retry', () => {
         try {
             await retry(mock, null, {retriesMax: 4, interval: 100, exponential: false});
             throw new Error('This test should have thrown an error !!!!');
-        } catch(e) {
+        } catch (e) {
             expect(e.message).toEqual('WTF');
             expect(mock).toHaveBeenCalled();
             expect(mock.mock.calls.length).toBe(4);
@@ -49,8 +49,35 @@ describe('retry', () => {
         try {
             const res = await retry(func);
             expect(res).toEqual('OK');
-        } catch(e) {
+        } catch (e) {
             throw new Error('This test shouldn\'t fail !!!!');
+        }
+    })
+
+    it('should not retry process and return value (inline style)', async () => {
+        try {
+            const res = await retry(async () => {return new Promise((resolve) => resolve('OK'))});
+            expect(res).toEqual('OK');
+        } catch (e) {
+            throw new Error('This test shouldn\'t fail !!!!');
+        }
+    })
+
+    it('should not retry process and return value (sync function)', async () => {
+        try {
+            const res = await retry(() => {return 'OK';});
+            expect(res).toEqual('OK');
+        } catch (e) {
+            throw new Error('This test shouldn\'t fail !!!!');
+        }
+    })
+
+    it('should retry process and fail (sync function)', async () => {
+        try {
+            await retry(() => {throw new Error('My sync function has just crashed !')});
+            throw new Error('This test should fail !!!!');
+        } catch (e) {
+            expect(e.message).toEqual('My sync function has just crashed !');
         }
     })
 })
