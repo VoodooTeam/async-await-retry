@@ -80,4 +80,15 @@ describe('retry', () => {
             expect(e.message).toEqual('My sync function has just crashed !');
         }
     })
+
+    it('should retry process and fail (promise syntaxe)', async () => {
+        try {
+            await retry(async () => {return new Promise((resolve, reject) => {
+                reject(new Error('My promise has just failed !'));
+            })});
+            throw new Error('This test should fail !!!!');
+        } catch (e) {
+            expect(e.message).toEqual('My promise has just failed !');
+        }
+    })
 })
