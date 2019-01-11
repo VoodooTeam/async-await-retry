@@ -17,7 +17,7 @@ No dependency.
 
 # Compatibility
 
-/!\ This module use async/await syntax, this is why you must have node 7.6+.
+**/!\ This module use async/await syntax, this is why you must have node 7.6+.**
 
 Supported and tested : >= 7.6
 
