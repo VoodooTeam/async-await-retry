@@ -63,7 +63,7 @@ try {
 }
 ```
 
-## Callback style
+## Anonymous function style
 ```javascript
 const retry = require('async-await-retry');
 
@@ -73,6 +73,20 @@ try {
     })
     
     console.log(res) // output : OK
+} catch (err) {
+    console.log('The function execution failed !')
+}
+```
+
+## Callback function style
+```javascript
+const retry = require('async-await-retry');
+
+try {
+    const res = await retry((arg1, cb) => {
+        ....
+        cb(err, data); // send err as first argument
+    }, ["arg1"], {isCb: true});
 } catch (err) {
     console.log('The function execution failed !')
 }
@@ -94,6 +108,7 @@ try {
 | `interval`    | Delay in ms between two tentatives         | 0              |
 | `exponential` | Will the interval increase exponentially ? | true           |
 | `factor`      | The exponential factor to use              | 2              |
+| `isCb`        | Old callback function style ?              | false          |
 
 
 An example of custom options :
