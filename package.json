@@ -1,6 +1,6 @@
 {
   "name": "async-await-retry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple module to retry a function with async/await syntax !",
   "engines": {
     "node": ">=7.6.0"
