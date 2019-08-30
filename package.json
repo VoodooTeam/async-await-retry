@@ -1,6 +1,6 @@
 {
   "name": "async-await-retry",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple module to retry a function with async/await syntax !",
   "engines": {
     "node": ">=7.6.0"
@@ -30,7 +30,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^6.0.1",
-    "jest": "^24.8.0"
+    "eslint": "^6.2.2",
+    "jest": "^24.9.0"
   }
 }
