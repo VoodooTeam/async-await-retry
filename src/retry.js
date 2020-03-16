@@ -39,6 +39,7 @@ const clone = (obj) => {
  * @property {Boolean} config.exponential : use exponential retry interval, by default true
  * @property {Number} config.factor: interval incrementation factor
  * @property {Number} config.isCb: is fn a callback style function ?
+ * @property {Function} config.cb: use a callback when an error has occured
  */
 module.exports = async (fn, args = [], config = {}) => {
     const retriesMax = config.retriesMax || 3;
@@ -56,9 +57,13 @@ module.exports = async (fn, args = [], config = {}) => {
                 return val;
             }
         } catch (error) {
+            let customDelay = 0
+            if(typeof config.cb === 'function') {
+                customDelay = config.cb(error, i, retriesMax, interval, exponential, factor);
+            }
             if(retriesMax === i+1 || (error.hasOwnProperty('retryable') && !error.retryable)) throw error;
 
-            interval = exponential ? interval * factor : interval;
+            interval = customDelay && Number.isInteger(customDelay) ? customDelay : exponential ? interval * factor : interval;
             // if interval is set to zero, do not use setTimeout, gain 1 event loop tick
             if (interval) await new Promise(r => setTimeout(r, interval));
         }
