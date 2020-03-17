@@ -149,7 +149,7 @@ describe('retry', () => {
         it('should retry process and throw custom error', async () => {
             const func = async () => {throw new Error('WTF')};
             try {
-                await retry(func, [], {retriesMax: 3, cb: (err) => { if(err.message === 'WTF') { throw new Error('Custom error') } }});
+                await retry(func, [], {retriesMax: 3, onAttemptFail: async (data) => { if(data.error.message === 'WTF') { throw new Error('Custom error') } }});
                 throw new Error('This test should have thrown an error !!!!');
             } catch(e) {
                 expect(e.message).toEqual('Custom error');
@@ -159,7 +159,7 @@ describe('retry', () => {
         it('should retry process and throw custom error with custom delay', async () => {
             const func = async () => {throw new Error('WTF')};
             try {
-                await retry(func, [], {retriesMax: 3, cb: () => { return 100 }});
+                await retry(func, [], {retriesMax: 3, onAttemptFail: () => { return }});
                 throw new Error('This test should have thrown an error !!!!');
             } catch(e) {
                 expect(e.message).toEqual('WTF');
