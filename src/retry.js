@@ -65,7 +65,7 @@ module.exports = async (fn, args = [], config = {}) => {
             }
         } catch (error) {
             if(retriesMax === i+1 || (error.hasOwnProperty('retryable') && !error.retryable)) throw error;
-            await onAttemptFail({
+            const result = await onAttemptFail({
                 error,
                 currentRetry: i,
                 retriesMax,
@@ -73,6 +73,7 @@ module.exports = async (fn, args = [], config = {}) => {
                 exponential,
                 factor
             });
+            if (!result && typeof config.onAttemptFail === 'function') return
         }
     }
 };
