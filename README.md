@@ -102,13 +102,14 @@ try {
 
 ## options
 
-| Option        | description                                | Default value  |
-| ------------- |:------------------------------------------:|:--------------:|
-| `retriesMax`  | Maximum number of retries                  | 3              |
-| `interval`    | Delay in ms between two tentatives         | 0              |
-| `exponential` | Will the interval increase exponentially ? | true           |
-| `factor`      | The exponential factor to use              | 2              |
-| `isCb`        | Old callback function style ?              | false          |
+| Option          | description                                | Default value    |
+| --------------- |:------------------------------------------:|:----------------:|
+| `retriesMax`    | Maximum number of retries                  | 3                |
+| `interval`      | Delay in ms between two tentatives         | 0                |
+| `exponential`   | Will the interval increase exponentially ? | true             |
+| `factor`        | The exponential factor to use              | 2                |
+| `isCb`          | Old callback function style ?              | false            |
+| `onAttemptFail` | User's callback to manage retry system     | default fallback |
 
 
 An example of custom options :
@@ -125,6 +126,39 @@ try {
     console.log('The function execution failed !')
 }
 ```
+
+## onAttemptFail
+This method can be used to manage, by yourself, the retry system.
+It's called when an error occurred and before to retry.
+This method can have three behaviors:
+- you can throw an error
+- if it returns truthy value then normal retry system continues
+- if it returns falsy value then the retry system stop
+
+```javascript
+const retry = require('async-await-retry');
+
+try {
+    const res = await retry(MyfuncToRetry, null, {
+        onAttemptFail: (data) => {
+            // do some stuff here, like logging errors
+        }
+    });
+} catch (err) {
+    console.log('The function execution failed !')
+}
+```
+
+The data argument is an object that can be described like this:
+
+| Property        | description                                |
+| --------------- |:------------------------------------------:|
+| `error`         | The current error object                   |
+| `currentRetry`  | The current retry value                    |
+| `retriesMax`    | Maximum number of retries                  |
+| `interval`      | Delay in ms between two tentatives         |
+| `exponential`   | Will the interval increase exponentially ? |
+| `factor`        | The exponential factor to use              |
 
 # Test
 
