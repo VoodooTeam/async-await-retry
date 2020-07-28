@@ -28,6 +28,12 @@ const clone = (obj) => {
     }
 }
 
+const onAttemptFailFallback = async (data) => {
+    const interval = data.exponential ? data.interval * data.factor : data.interval;
+    // if interval is set to zero, do not use setTimeout, gain 1 event loop tick
+    if (interval) await new Promise(r => setTimeout(r, interval));
+}
+
 /**
  * Retry system with async / await
  * 
@@ -39,12 +45,14 @@ const clone = (obj) => {
  * @property {Boolean} config.exponential : use exponential retry interval, by default true
  * @property {Number} config.factor: interval incrementation factor
  * @property {Number} config.isCb: is fn a callback style function ?
+ * @property {Function} config.onAttemptFail: use a callback when an error has occured
  */
 module.exports = async (fn, args = [], config = {}) => {
     const retriesMax = config.retriesMax || 3;
     let interval = config.interval || 0;
     const exponential = config.hasOwnProperty('exponential') ? config.exponential : true;
     const factor = config.factor || 2;
+    const onAttemptFail = typeof config.onAttemptFail === 'function' ? config.onAttemptFail : onAttemptFailFallback;
 
     for (let i = 0; i < retriesMax; i++) {
         try {
@@ -57,10 +65,15 @@ module.exports = async (fn, args = [], config = {}) => {
             }
         } catch (error) {
             if(retriesMax === i+1 || (error.hasOwnProperty('retryable') && !error.retryable)) throw error;
-
-            interval = exponential ? interval * factor : interval;
-            // if interval is set to zero, do not use setTimeout, gain 1 event loop tick
-            if (interval) await new Promise(r => setTimeout(r, interval));
+            const result = await onAttemptFail({
+                error,
+                currentRetry: i,
+                retriesMax,
+                interval,
+                exponential,
+                factor
+            });
+            if (!result && typeof config.onAttemptFail === 'function') return
         }
     }
 };
