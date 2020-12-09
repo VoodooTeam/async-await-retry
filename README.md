@@ -1,11 +1,13 @@
 <div align="center">
 <b>Async / Await exponential retry</b><br/>
 <br/><br/>
-
-<a href="https://badge.fury.io/js/async-await-retry">
-   <img src="https://badge.fury.io/js/async-await-retry.svg" alt="npm version" height="18">
-</a>
 </div>
+
+[![GitHub release](https://badge.fury.io/js/async-await-retry.svg)](https://github.com/VoodooTeam/async-await-retry/releases/)
+[![GitHub license](https://img.shields.io/github/license/VoodooTeam/async-await-retry)](https://github.com/VoodooTeam/async-await-retry/blob/master/LICENSE)
+[![CI pipeline](https://github.com/VoodooTeam/async-await-retry/workflows/Node.js%20CI/badge.svg)](https://github.com/VoodooTeam/async-await-retry/actions?query=workflow%3A%22Node.js+CI%22)
+[![Opened issues](https://img.shields.io/github/issues-raw/VoodooTeam/async-await-retry)](https://github.com/VoodooTeam/async-await-retry/issues)
+[![Opened PR](https://img.shields.io/github/issues-pr-raw/VoodooTeam/async-await-retry)](https://github.com/VoodooTeam/async-await-retry/pulls)
 
 
 # Purpose

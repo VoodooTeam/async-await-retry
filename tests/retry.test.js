@@ -101,7 +101,7 @@ describe('retry', () => {
         const mock = jest.fn(func);
 
         try {
-            await retry(mock, null, {retriesMax: 4, interval: 100, exponential: false});
+            await retry(mock, null, {retriesMax: 2, interval: 100, exponential: true});
             throw new Error('This test should have thrown an error !!!!');
         } catch (e) {
             expect(e.message).toEqual('Not retryable');

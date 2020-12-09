@@ -1,7 +1,17 @@
 {
   "name": "async-await-retry",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simple module to retry a function with async/await syntax !",
+  "main": "index.js",
+  "bin": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.js"
+  },
+  "files": [
+    "src/**"
+  ],
   "engines": {
     "node": ">=7.6.0"
   },
@@ -13,13 +23,17 @@
     "async",
     "await",
     "promises",
-    "retries"
+    "retries",
+    "error"
   ],
   "homepage": "https://github.com/VoodooTeam/async-await-retry",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VoodooTeam/async-await-retry.git"
+  },
   "scripts": {
     "test": "./node_modules/.bin/jest",
-    "lint": "./node_modules/.bin/eslint -c ./.eslintrc ./",
+    "linter": "./node_modules/.bin/eslint -c ./.eslintrc ./",
     "all": "npm run lint && npm run test"
   },
   "author": {
@@ -30,7 +44,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^7.5.0",
-    "jest": "^26.1.0"
+    "eslint": "^7.15.0",
+    "jest": "^26.3.0"
   }
 }
