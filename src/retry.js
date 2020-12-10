@@ -31,7 +31,7 @@ const clone = (obj) => {
 const onAttemptFailFallback = async (data) => {
     const interval = data.exponential ? data.interval * data.factor : data.interval;
     // if interval is set to zero, do not use setTimeout, gain 1 event loop tick
-    if (interval) await new Promise(r => setTimeout(r, interval));
+    if (interval) await new Promise(r => setTimeout(r, interval + data.jitter));
 }
 
 /**
@@ -50,6 +50,7 @@ const onAttemptFailFallback = async (data) => {
 module.exports = async (fn, args = [], config = {}) => {
     const retriesMax = config.retriesMax || 3;
     let interval = config.interval || 0;
+    const jitter = config.jitter ? Math.floor(Math.random() * config.jitter) + 1 : 0;
     const exponential = Object.prototype.hasOwnProperty.call(config, 'exponential') ? config.exponential : true;
     const factor = config.factor || 2;
     const onAttemptFail = typeof config.onAttemptFail === 'function' ? config.onAttemptFail : onAttemptFailFallback;
@@ -71,7 +72,8 @@ module.exports = async (fn, args = [], config = {}) => {
                 retriesMax,
                 interval,
                 exponential,
-                factor
+                factor,
+                jitter
             });
             if (!result && typeof config.onAttemptFail === 'function') return
         }
