@@ -113,6 +113,7 @@ try {
 | `interval`      | Delay in ms between two tentatives         | 0                |
 | `exponential`   | Will the interval increase exponentially ? | true             |
 | `factor`        | The exponential factor to use              | 2                |
+| `jitter`        | Random jitter in ms to add to the interval | 0                |
 | `isCb`          | Old callback function style ?              | false            |
 | `onAttemptFail` | User's callback to manage retry system     | default fallback |
 
@@ -124,7 +125,7 @@ const retry = require('async-await-retry');
 try {
     const res = await retry(async () => {
       return new Promise((resolve) => resolve('OK'))
-    }, null, {retriesMax: 4, interval: 100, exponential: true, factor: 3})
+    }, null, {retriesMax: 4, interval: 100, exponential: true, factor: 3, jitter: 100})
     
     console.log(res) // output : OK
 } catch (err) {
@@ -164,6 +165,7 @@ The data argument is an object that can be described like this:
 | `interval`      | Delay in ms between two tentatives         |
 | `exponential`   | Will the interval increase exponentially ? |
 | `factor`        | The exponential factor to use              |
+| `jitter`        | Random jitter in ms to add to the interval |
 
 # Test
 

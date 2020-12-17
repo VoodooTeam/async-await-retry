@@ -110,6 +110,23 @@ describe('retry', () => {
         }
     })
 
+    it('should retry process but failed with jitter', async () => {
+        const func = async () => {throw new Error('Error with jitter')};
+        const mock = jest.fn(func);
+        const before = Date.now();
+
+        try {
+            await retry(mock, null, {retriesMax: 2, interval: 150, exponential: false, jitter: 100});
+            throw new Error('This test should have thrown an error !!!!');
+        } catch (e) {
+            expect(e.message).toEqual('Error with jitter');
+            expect(mock).toHaveBeenCalled();
+            expect(mock.mock.calls.length).toBe(2);
+            const timeinMs = Date.now() - before
+            expect(timeinMs).toBeGreaterThan(150)
+        }
+    })
+
     describe("Callback style", () => {
         it('should retry process and fail without args', async () => {
             try {
