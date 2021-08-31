@@ -1,0 +1,11 @@
+{
+    "dependencies-check": {
+        "args": {
+            "ignoreMatches": [
+                "eslint",
+                "jest",
+                "typescript"
+            ]
+        }
+    }
+}
