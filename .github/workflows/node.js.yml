@@ -23,13 +23,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run linter
 
     - name: Run the qualscan tool
       run: | 
         npm install qualscan -g
         qualscan --scripts
+
+    - run: npm ci
+    - run: npm run linter
 
     - name: Run the tests and generate coverage report
       run: npm run test
