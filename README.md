@@ -10,8 +10,6 @@
 [![Opened PR](https://img.shields.io/github/issues-pr-raw/VoodooTeam/async-await-retry.svg)](https://github.com/VoodooTeam/async-await-retry/pulls)
 [![DeepScan grade](https://deepscan.io/api/teams/12068/projects/15025/branches/292974/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12068&pid=15025&bid=292974)
 [![Code coverage](https://codecov.io/gh/VoodooTeam/async-await-retry/branch/master/graph/badge.svg)](https://codecov.io/gh/VoodooTeam/async-await-retry)
-[![Dependencies updates](https://img.shields.io/david/VoodooTeam/async-await-retry.svg)](https://github.com/VoodooTeam/async-await-retry)
-[![Dev Dependencies updates](https://img.shields.io/david/dev/VoodooTeam/async-await-retry.svg)](https://github.com/VoodooTeam/async-await-retry)
 [![Node version](https://img.shields.io/node/v-lts/async-await-retry.svg)](https://github.com/VoodooTeam/async-await-retry)
 
 
