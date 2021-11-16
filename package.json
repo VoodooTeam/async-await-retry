@@ -1,6 +1,6 @@
 {
   "name": "async-await-retry",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Simple module to retry a function with async/await syntax !",
   "main": "index.js",
   "bin": "./index.js",
