@@ -1,3 +1,14 @@
+# Version 2.0.0 released on 2022-06-30
+
+**MaxBackoff**
+
+We introduced a new formula when using exponential backoff and a maxBackoff limit to avoid very long time between retries.
+
+Breaking changes: potentially the new formula can lengthen the time between retries if you use exponential backoff.
+
+[Release](https://github.com/VoodooTeam/async-await-retry/releases/tag/2.0.0) - Version 2.0.0
+
+
 # Version 1.2.0 released on 2020-12-17
 
 **Jitter**
