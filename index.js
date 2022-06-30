@@ -29,7 +29,7 @@ const clone = (obj) => {
 }
 
 const onAttemptFailFallback = async (data) => {
-    const interval = data.exponential ? data.interval * data.factor : data.interval;
+    const interval = data.exponential ? Math.min(Math.pow(data.factor, data.currentRetry) * data.interval, data.maxBackoff) : data.interval;
     // if interval is set to zero, do not use setTimeout, gain 1 event loop tick
     if (interval) await new Promise(r => setTimeout(r, interval + data.jitter));
 }
@@ -46,6 +46,7 @@ const onAttemptFailFallback = async (data) => {
  * @property {Number} config.factor: interval incrementation factor
  * @property {Number} config.isCb: is fn a callback style function ?
  * @property {Function} config.onAttemptFail: use a callback when an error has occured
+ * @property {Number} config.maxBackoff : maximum time of backoff, by default 30 seconds
  */
 module.exports = async (fn, args = [], config = {}) => {
     const retriesMax = config.retriesMax || 3;
@@ -54,6 +55,7 @@ module.exports = async (fn, args = [], config = {}) => {
     const exponential = Object.prototype.hasOwnProperty.call(config, 'exponential') ? config.exponential : true;
     const factor = config.factor || 2;
     const onAttemptFail = typeof config.onAttemptFail === 'function' ? config.onAttemptFail : onAttemptFailFallback;
+    const maxBackoff = config.maxBackoff || 30000;
 
     for (let i = 0; i < retriesMax; i++) {
         try {
@@ -73,7 +75,8 @@ module.exports = async (fn, args = [], config = {}) => {
                 interval,
                 exponential,
                 factor,
-                jitter
+                jitter,
+                maxBackoff
             });
             if (!result && typeof config.onAttemptFail === 'function') return
         }
