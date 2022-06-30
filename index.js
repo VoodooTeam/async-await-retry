@@ -46,6 +46,7 @@ const onAttemptFailFallback = async (data) => {
  * @property {Number} config.factor: interval incrementation factor
  * @property {Number} config.isCb: is fn a callback style function ?
  * @property {Function} config.onAttemptFail: use a callback when an error has occured
+ * @property {Number} config.maxBackoff : maximum time of backoff, by default 30 seconds
  */
 module.exports = async (fn, args = [], config = {}) => {
     const retriesMax = config.retriesMax || 3;

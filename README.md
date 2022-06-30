@@ -110,15 +110,16 @@ try {
 
 ## options
 
-| Option          | description                                | Default value    |
-| --------------- |:------------------------------------------:|:----------------:|
-| `retriesMax`    | Maximum number of retries                  | 3                |
-| `interval`      | Delay in ms between two tentatives         | 0                |
-| `exponential`   | Will the interval increase exponentially ? | true             |
-| `factor`        | The exponential factor to use              | 2                |
-| `jitter`        | Random jitter in ms to add to the interval | 0                |
-| `isCb`          | Old callback function style ?              | false            |
-| `onAttemptFail` | User's callback to manage retry system     | default fallback |
+| Option          | description                                      | Default value    |
+| --------------- |:------------------------------------------------:|:----------------:|
+| `retriesMax`    | Maximum number of retries                        | 3                |
+| `interval`      | Delay in ms between two tentatives               | 0                |
+| `exponential`   | Will the interval increase exponentially ?       | true             |
+| `maxBackoff`    | Maximum delay before to retry (with exponential) | 30s              |
+| `factor`        | The exponential factor to use                    | 2                |
+| `jitter`        | Random jitter in ms to add to the interval       | 0                |
+| `isCb`          | Old callback function style ?                    | false            |
+| `onAttemptFail` | User's callback to manage retry system           | default fallback |
 
 
 An example of custom options :
@@ -169,6 +170,7 @@ The data argument is an object that can be described like this:
 | `exponential`   | Will the interval increase exponentially ? |
 | `factor`        | The exponential factor to use              |
 | `jitter`        | Random jitter in ms to add to the interval |
+| `maxBackoff`    | Maximum delay before to retry              |
 
 # Test
 
