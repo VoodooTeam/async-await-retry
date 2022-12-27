@@ -28,13 +28,14 @@ Supported and tested : >= 7.6
 
 | Version       | Supported     | Tested         |
 | ------------- |:-------------:|:--------------:|
+| 18.x          | yes           | yes            |
 | 16.x          | yes           | yes            |
 | 14.x          | yes           | yes            |
-| 12.x          | yes           | yes            |
-| 10.x          | yes           | yes            |
-| 9.x           | yes           | yes            |
-| 8.x           | yes           | yes            |
-| >= 7.6        | yes           | yes            |
+| 12.x          | no            | yes            |
+| 10.x          | no            | yes            |
+| 9.x           | no            | yes            |
+| 8.x           | no            | yes            |
+| >= 7.6        | no            | yes            |
 
 # Installation
 
