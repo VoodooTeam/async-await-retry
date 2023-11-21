@@ -28,6 +28,7 @@ Supported and tested : >= 7.6
 
 | Version       | Supported     | Tested         |
 | ------------- |:-------------:|:--------------:|
+| 20.x          | yes           | yes            |
 | 18.x          | yes           | yes            |
 | 16.x          | yes           | yes            |
 | 14.x          | yes           | yes            |
